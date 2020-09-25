@@ -11,7 +11,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
   serverRuntimeConfig: {
     // Will be available only on the server side
-    secret: '123'
+    secret: '123',
   },
 
   publicRuntimeConfig: {
@@ -19,10 +19,10 @@ module.exports = {
     NProgressShowSpinner: false,
     pageTitle: process.env.PROJECT_NAME,
     pageDescription: process.env.PROJECT_DESCRIPTION,
-    localStorageUserId: process.env.PROJECT_LOCAL_STORAGE_AUTHENTICATED_USER_ID
+    localStorageUserId: process.env.PROJECT_LOCAL_STORAGE_AUTHENTICATED_USER_ID,
   },
-
-  webpack: config => {
+  target: 'serverless',
+  webpack: (config) => {
     config.plugins = config.plugins || [];
 
     config.plugins = [
@@ -30,10 +30,10 @@ module.exports = {
 
       new Dotenv({
         path: path.join(__dirname, '.env'),
-        systemvars: true
-      })
+        systemvars: true,
+      }),
     ];
 
     return config;
-  }
+  },
 };
